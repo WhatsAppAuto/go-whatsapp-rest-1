@@ -3,7 +3,7 @@
 
 - Para instalar
 > Este projeto utiliza a linguagem de programação GO :
-          [Site da Linguagem]([http://www.golangbr.org/](http://www.golangbr.org/)) (protuguês)
+[Site da Linguagem](http://www.golangbr.org/)
 
 ## Estrutura do Projeto
 ```bash
