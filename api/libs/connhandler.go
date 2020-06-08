@@ -46,55 +46,55 @@ func (myHandler) HandleError(err error) {
 	fmt.Fprintf(os.Stderr, "%v", err)
 }
 func (myHandler) HandleLiveLocationMessage(message whatsapp.LiveLocationMessage) {
-	if message.Info.RemoteJid == "558599628852-1585619935@g.us" {
 
-		data, err := json.Marshal(message)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-		fmt.Println(string(data))
-		// _, err = http.Post("http://127.0.0.1:8000/botman", "application/json", bytes.NewBuffer(data))
-		// if err != nil {
-		// 	fmt.Println(err)
-		// 	return
-		// }
+
+	data, err := json.Marshal(message)
+	if err != nil {
+		fmt.Println(err)
+		return
 	}
+	fmt.Println(string(data))
+	// _, err = http.Post("http://127.0.0.1:8000/botman", "application/json", bytes.NewBuffer(data))
+	// if err != nil {
+	// 	fmt.Println(err)
+	// 	return
+	// }
+
 
 }
 
 func (myHandler) HandleLocationMessage(message whatsapp.LocationMessage) {
-	if message.Info.RemoteJid == "558599628852-1585619935@g.us" {
-		response := wpLocationResponse{
-			Info: wpResponse{
-				Id:          message.Info.Id,
-				RemoteJid:   message.Info.RemoteJid,
-				SenderJid:   message.Info.SenderJid,
-				FromMe:      message.Info.FromMe,
-				Timestamp:   message.Info.Timestamp,
-				PushName:    message.Info.PushName,
-				MessageType: "location",
-			},
-			Latitude:  message.DegreesLatitude,
-			Longitude: message.DegreesLongitude,
-			Name:      message.Name,
-			Address:   message.Address,
-			Url:       message.Url,
-			Context:   message.ContextInfo,
-		}
 
-		data, err := json.Marshal(response)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-		fmt.Println(string(data))
-		// _, err = http.Post("http://127.0.0.1:8000/botman", "application/json", bytes.NewBuffer(data))
-		// if err != nil {
-		// 	fmt.Println(err)
-		// 	return
-		// }
+	response := wpLocationResponse{
+		Info: wpResponse{
+			Id:          message.Info.Id,
+			RemoteJid:   message.Info.RemoteJid,
+			SenderJid:   message.Info.SenderJid,
+			FromMe:      message.Info.FromMe,
+			Timestamp:   message.Info.Timestamp,
+			PushName:    message.Info.PushName,
+			MessageType: "location",
+		},
+		Latitude:  message.DegreesLatitude,
+		Longitude: message.DegreesLongitude,
+		Name:      message.Name,
+		Address:   message.Address,
+		Url:       message.Url,
+		Context:   message.ContextInfo,
 	}
+
+	data, err := json.Marshal(response)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println(string(data))
+	// _, err = http.Post("http://127.0.0.1:8000/botman", "application/json", bytes.NewBuffer(data))
+	// if err != nil {
+	// 	fmt.Println(err)
+	// 	return
+	// }
+	
 
 }
 
@@ -116,7 +116,19 @@ func (myHandler) HandleStickerMessage(message whatsapp.StickerMessage) {
 }
 
 func (myHandler) HandleTextMessage(message whatsapp.TextMessage) {
-	
+	response := wpTextResponse{
+		Info: wpResponse{
+			Id:          message.Info.Id,
+			RemoteJid:   message.Info.RemoteJid,
+			SenderJid:   message.Info.SenderJid,
+			FromMe:      message.Info.FromMe,
+			Timestamp:   message.Info.Timestamp,
+			PushName:    message.Info.PushName,
+			MessageType: "text",
+		},
+		Text:    message.Text,
+		Context: message.ContextInfo,
+	}
 	data, err := json.Marshal(response)
 	_, err = http.Post("http://127.0.0.1:8000/botman", "application/json", bytes.NewBuffer(data))
 	if err != nil {
