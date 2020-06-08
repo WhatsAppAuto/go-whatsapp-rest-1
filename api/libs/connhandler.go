@@ -116,78 +116,62 @@ func (myHandler) HandleStickerMessage(message whatsapp.StickerMessage) {
 }
 
 func (myHandler) HandleTextMessage(message whatsapp.TextMessage) {
-	if message.Info.RemoteJid == "558599628852-1585619935@g.us" {
-		response := wpTextResponse{
-			Info: wpResponse{
-				Id:          message.Info.Id,
-				RemoteJid:   message.Info.RemoteJid,
-				SenderJid:   message.Info.SenderJid,
-				FromMe:      message.Info.FromMe,
-				Timestamp:   message.Info.Timestamp,
-				PushName:    message.Info.PushName,
-				MessageType: "text",
-			},
-			Text:    message.Text,
-			Context: message.ContextInfo,
-		}
+	
+	data, err := json.Marshal(response)
+	_, err = http.Post("http://127.0.0.1:8000/botman", "application/json", bytes.NewBuffer(data))
+	if err != nil {
+		fmt.Println(err)
+		return
 
-		data, err := json.Marshal(response)
-		_, err = http.Post("http://127.0.0.1:8000/botman", "application/json", bytes.NewBuffer(data))
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
 	}
 
 }
 
 func (myHandler) HandleImageMessage(message whatsapp.ImageMessage) {
-	if message.Info.RemoteJid == "558599628852-1585619935@g.us" {
-
-		response := wpDataResponse{
-			Info: wpResponse{
-				Id:          message.Info.Id,
-				RemoteJid:   message.Info.RemoteJid,
-				SenderJid:   message.Info.SenderJid,
-				FromMe:      message.Info.FromMe,
-				Timestamp:   message.Info.Timestamp,
-				PushName:    message.Info.PushName,
-				MessageType: "data/image",
-			},
-			Caption: message.Caption,
-			Data:    "",
-			Context: message.ContextInfo,
-		}
-		data, err := message.Download()
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-		f, err1 := os.Create("./share/store/" + string(message.Info.Id))
-		if err1 != nil {
-			fmt.Println(err1)
-			return
-		}
-		defer f.Close()
-		_, err = f.Write(data)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-		response.Data = string(message.Info.Id)
-		payload, err2 := json.Marshal(response)
-		if err2 != nil {
-			fmt.Println(err2)
-			return
-		}
-		fmt.Println(string(data))
-
-		_, err = http.Post("http://127.0.0.1:8000/botman", "application/json", bytes.NewBuffer(payload))
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
+	response := wpDataResponse{
+		Info: wpResponse{
+			Id:          message.Info.Id,
+			RemoteJid:   message.Info.RemoteJid,
+			SenderJid:   message.Info.SenderJid,
+			FromMe:      message.Info.FromMe,
+			Timestamp:   message.Info.Timestamp,
+			PushName:    message.Info.PushName,
+			MessageType: "data/image",
+		},
+		Caption: message.Caption,
+		Data:    "",
+		Context: message.ContextInfo,
 	}
+	data, err := message.Download()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	f, err1 := os.Create("./share/store/" + string(message.Info.Id))
+	if err1 != nil {
+		fmt.Println(err1)
+		return
+	}
+	defer f.Close()
+	_, err = f.Write(data)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	response.Data = string(message.Info.Id)
+	payload, err2 := json.Marshal(response)
+	if err2 != nil {
+		fmt.Println(err2)
+		return
+	}
+	fmt.Println(string(data))
+
+	_, err = http.Post("http://127.0.0.1:8000/botman", "application/json", bytes.NewBuffer(payload))
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
 }
 
 func (myHandler) HandleDocumentMessage(message whatsapp.DocumentMessage) {
@@ -195,51 +179,50 @@ func (myHandler) HandleDocumentMessage(message whatsapp.DocumentMessage) {
 }
 
 func (myHandler) HandleVideoMessage(message whatsapp.VideoMessage) {
-	if message.Info.RemoteJid == "558599628852-1585619935@g.us" {
-		response := wpDataResponse{
-			Info: wpResponse{
-				Id:          message.Info.Id,
-				RemoteJid:   message.Info.RemoteJid,
-				SenderJid:   message.Info.SenderJid,
-				FromMe:      message.Info.FromMe,
-				Timestamp:   message.Info.Timestamp,
-				PushName:    message.Info.PushName,
-				MessageType: "data/image",
-			},
-			Caption: message.Caption,
-			Data:    "",
-			Context: message.ContextInfo,
-		}
-		data, err := message.Download()
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
 
-		f, err1 := os.Create("./share/store/" + string(message.Info.Id))
-		if err1 != nil {
-			fmt.Println(err1)
-			return
-		}
-		defer f.Close()
-		_, err = f.Write(data)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-		response.Data = string(message.Info.Id)
-		payload, err2 := json.Marshal(response)
-		if err2 != nil {
-			fmt.Println(err2)
-			return
-		}
-		fmt.Println(string(data))
+	response := wpDataResponse{
+		Info: wpResponse{
+			Id:          message.Info.Id,
+			RemoteJid:   message.Info.RemoteJid,
+			SenderJid:   message.Info.SenderJid,
+			FromMe:      message.Info.FromMe,
+			Timestamp:   message.Info.Timestamp,
+			PushName:    message.Info.PushName,
+			MessageType: "data/image",
+		},
+		Caption: message.Caption,
+		Data:    "",
+		Context: message.ContextInfo,
+	}
+	data, err := message.Download()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 
-		_, err = http.Post("http://127.0.0.1:8000/botman", "application/json", bytes.NewBuffer(payload))
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
+	f, err1 := os.Create("./share/store/" + string(message.Info.Id))
+	if err1 != nil {
+		fmt.Println(err1)
+		return
+	}
+	defer f.Close()
+	_, err = f.Write(data)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	response.Data = string(message.Info.Id)
+	payload, err2 := json.Marshal(response)
+	if err2 != nil {
+		fmt.Println(err2)
+		return
+	}
+	fmt.Println(string(data))
+
+	_, err = http.Post("http://127.0.0.1:8000/botman", "application/json", bytes.NewBuffer(payload))
+	if err != nil {
+		fmt.Println(err)
+		return
 	}
 
 }
