@@ -85,7 +85,7 @@ func configLoadValues() {
 	serverCfg.IP = Config.GetString("SERVER_IP")
 
 	// Server Port Value
-	Config.SetDefault("SERVER_PORT", "3000")
+	Config.SetDefault("SERVER_PORT", "")
 	serverCfg.Port = Config.GetString("SERVER_PORT")
 
 	// Server Store Path Value
