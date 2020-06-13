@@ -8,11 +8,10 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
 
-	_ "github.com/jinzhu/gorm/dialects/postgres" //mysql database driver
+	_ "github.com/jinzhu/gorm/dialects/postgres" //postgress database driver
 
-	"github.com/exatasmente/go-rest/api/models"
+	"github.com/exatasmente/go-whatsapp-rest/api/models"
 )
-
 
 type Server struct {
 	DB     *gorm.DB
@@ -23,8 +22,7 @@ func (server *Server) Initialize(Dbdriver, DbUser, DbPassword, DbPort, DbHost, D
 
 	var err error
 
-
-	DBURL := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s",DbHost,DbPort,DbUser,DbName,DbPassword)
+	DBURL := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s", DbHost, DbPort, DbUser, DbName, DbPassword)
 	server.DB, err = gorm.Open(Dbdriver, DBURL)
 	if err != nil {
 		fmt.Printf("Cannot connect to %s database\n", Dbdriver)
@@ -41,7 +39,7 @@ func (server *Server) Initialize(Dbdriver, DbUser, DbPassword, DbPort, DbHost, D
 }
 
 func (server *Server) Run(addr string) {
-	fmt.Println("Listening to port 3000")
+
 	fs := http.FileServer(http.Dir("./storage"))
 	http.Handle("/", fs)
 	log.Fatal(http.ListenAndServe(addr, server.Router))

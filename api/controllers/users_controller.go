@@ -9,10 +9,10 @@ import (
 	"strconv"
 
 	"github.com/gorilla/mux"
-	"github.com/exatasmente/go-rest/api/auth"
-	"github.com/exatasmente/go-rest/api/models"
-	responses "github.com/exatasmente/go-rest/api/responses"
-	"github.com/exatasmente/go-rest/api/utils/formaterror"
+	"github.com/exatasmente/go-whatsapp-rest/api/auth"
+	"github.com/exatasmente/go-whatsapp-rest/api/models"
+	responses "github.com/exatasmente/go-whatsapp-rest/api/responses"
+	"github.com/exatasmente/go-whatsapp-rest/api/utils/formaterror"
 )
 
 func (server *Server) CreateUser(w http.ResponseWriter, r *http.Request) {

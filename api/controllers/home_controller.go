@@ -3,7 +3,7 @@ package controllers
 import (
 	"net/http"
 
-	responses "github.com/exatasmente/go-rest/api/responses"
+	responses "github.com/exatasmente/go-whatsapp-rest/api/responses"
 )
 
 func (server *Server) Home(w http.ResponseWriter, r *http.Request) {

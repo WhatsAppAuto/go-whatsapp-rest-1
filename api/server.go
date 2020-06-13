@@ -5,8 +5,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/exatasmente/go-rest/api/controllers"
-	"github.com/exatasmente/go-rest/api/seed"
+	"github.com/exatasmente/go-whatsapp-rest/api/controllers"
+	"github.com/exatasmente/go-whatsapp-rest/api/seed"
 	"github.com/joho/godotenv"
 )
 
@@ -26,6 +26,6 @@ func Run() {
 
 	seed.Load(server.DB)
 
-	server.Run(":8080")
+	server.Run(":3000")
 
 }

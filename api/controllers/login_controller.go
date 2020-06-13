@@ -6,9 +6,9 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/exatasmente/go-rest/api/auth"
-	"github.com/exatasmente/go-rest/api/models"
-	responses "github.com/exatasmente/go-rest/api/responses"
+	"github.com/exatasmente/go-whatsapp-rest/api/auth"
+	"github.com/exatasmente/go-whatsapp-rest/api/models"
+	responses "github.com/exatasmente/go-whatsapp-rest/api/responses"
 	"golang.org/x/crypto/bcrypt"
 )
 

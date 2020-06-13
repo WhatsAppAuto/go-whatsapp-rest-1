@@ -15,7 +15,7 @@ import (
 
 	whatsapp "github.com/Rhymen/go-whatsapp"
 	waproto "github.com/Rhymen/go-whatsapp/binary/proto"
-	models "github.com/exatasmente/go-rest/api/models"
+	models "github.com/exatasmente/go-whatsapp-rest/api/models"
 	qrcode "github.com/skip2/go-qrcode"
 )
 

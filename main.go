@@ -1,6 +1,6 @@
 package main
 
-import "github.com/exatasmente/go-rest/api"
+import "github.com/exatasmente/go-whatsapp-rest/api"
 
 func main() {
 	api.Run()

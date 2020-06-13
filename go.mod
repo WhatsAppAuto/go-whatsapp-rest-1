@@ -1,4 +1,4 @@
-module github.com/exatasmente/go-rest
+module github.com/exatasmente/go-whatsapp-rest
 
 go 1.14
 
