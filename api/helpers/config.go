@@ -83,6 +83,7 @@ func configLoadValues() {
 	// Server IP Value
 	Config.SetDefault("SERVER_IP", "0.0.0.0")
 	serverCfg.IP = Config.GetString("SERVER_IP")
+	serverCfg.Port = Config.GetString('SERVER_PORT')
 
 	// Server Store Path Value
 	Config.SetDefault("SERVER_STORE_PATH", "./share/store")
