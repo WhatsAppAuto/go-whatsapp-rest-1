@@ -26,6 +26,6 @@ func Run() {
 
 	seed.Load(server.DB)
 
-	server.Run(":3000")
+	server.Run("0.0.0.0:3000")
 
 }
